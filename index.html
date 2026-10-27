@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101b31">
+  <title>OpsPriority | Incident Assessment</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-icon">O</span><span>OpsPriority<small>Operations toolkit</small></span></div>
+      <nav aria-label="Main navigation"><a href="#assessment" class="nav-active">◈ &nbsp; Incident assessment</a><a href="#history">▤ &nbsp; Recent assessments</a></nav>
+      <div class="sidebar-bottom"><span class="status-dot"></span> Local demo environment<br><small>All data stays in this browser</small></div>
+    </aside>
+    <main>
+      <header class="topbar"><span>Operations / Incident assessment</span><span class="environment">DEMO ENVIRONMENT</span></header>
+      <div class="content">
+        <div class="heading"><div><p class="eyebrow">INCIDENT MANAGEMENT</p><h1>Incident priority assessment</h1><p class="subheading">Evaluate business impact and urgency to generate a suggested incident priority.</p></div><div class="version">Version 1.0</div></div>
+        <div class="metrics"><div class="metric"><span>Priority levels</span><strong>04</strong><small>P1 critical to P4 low</small></div><div class="metric"><span>Assessment method</span><strong>Rule-based</strong><small>Consistent decision logic</small></div><div class="metric"><span>Storage</span><strong>Local only</strong><small>No personal data required</small></div></div>
+        <div class="columns" id="assessment">
+          <section class="panel"><div class="panel-heading"><span class="step">01</span><div><h2>Assess an incident</h2><p>Choose the options that best describe the incident.</p></div></div>
+            <form id="incident-form">
+              <label for="impact">Business impact <span class="required">*</span></label><select id="impact" required><option value="">Select business impact</option><option value="3">High — major business disruption</option><option value="2">Medium — partial disruption</option><option value="1">Low — minor inconvenience</option></select>
+              <label for="urgency">Urgency <span class="required">*</span></label><select id="urgency" required><option value="">Select urgency</option><option value="3">High — immediate action needed</option><option value="2">Medium — action needed soon</option><option value="1">Low — can be scheduled</option></select>
+              <label for="criticality">Service criticality <span class="required">*</span></label><select id="criticality" required><option value="">Select service criticality</option><option value="2">Business-critical service</option><option value="1">Standard business service</option></select>
+              <label for="affected">Users affected <span class="required">*</span></label><select id="affected" required><option value="">Select affected user group</option><option value="2">Multiple teams / entire organisation</option><option value="1">Individual / small team</option></select>
+              <div class="form-actions"><button type="submit" class="primary">Calculate priority <span aria-hidden="true">→</span></button><button type="reset" class="secondary">Reset</button></div>
+            </form>
+          </section>
+          <section class="panel result-panel"><div class="panel-heading"><span class="step">02</span><div><h2>Assessment result</h2><p>Suggested priority based on your selections.</p></div></div>
+            <div id="empty-result" class="empty-result"><div class="empty-icon">◎</div><h3>Awaiting assessment</h3><p>Complete the incident details to see a suggested priority and response target.</p></div>
+            <div id="result" class="result" hidden aria-live="polite"><div class="result-label">SUGGESTED PRIORITY</div><div id="priority-code" class="priority-code"></div><h3 id="priority-title"></h3><p id="priority-description"></p><div class="response-box"><span>Illustrative response target</span><strong id="response-target"></strong></div><p class="disclaimer">Example targets only. Follow your organisation's incident management policy.</p></div>
+          </section>
+        </div>
+        <section class="panel history-panel" id="history"><div class="history-heading"><div><h2>Recent assessments</h2><p>Last five calculations saved in this browser.</p></div><button id="clear-history" class="secondary small" type="button">Clear history</button></div><div id="history-content" class="history-empty">No assessments recorded yet.</div></section>
+        <footer>OpsPriority • Demonstration application for DevOps learning • No production incident data</footer>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+
+name: DevOps Assignment CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: Validate OpsPriority Application
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout DevOps Assignment repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Check website files exist
+        run: |
+          test -f index.html
+          test -f styles.css
+          test -f app.js
+
+      - name: Validate JavaScript syntax
+        run: node --check app.js
+
+      - name: Confirm validation complete
+        run: echo "OpsPriority validation successful"

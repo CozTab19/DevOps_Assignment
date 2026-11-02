@@ -10,14 +10,6 @@ const priorities = {
   P3: { title: 'Medium priority', description: 'Moderate impact that should be addressed through normal support processes.', target: '4 hours' },
   P4: { title: 'Low priority', description: 'Limited disruption that can be scheduled into routine support.', target: '1 business day' }
 };
-function calculatePriority({ impact, urgency, criticality, affected }) {
-  const values = [impact, urgency, criticality, affected];
-  if (values.some(value => !Number.isInteger(value)) || impact < 1 || impact > 3 || urgency < 1 || urgency > 3 || criticality < 1 || criticality > 2 || affected < 1 || affected > 2) {
-    throw new Error('Invalid incident assessment');
-  }
-  const score = impact + urgency + criticality + affected;
-  return score >= 9 ? 'P1' : score >= 7 ? 'P2' : score >= 5 ? 'P3' : 'P4';
-}
 function getHistory() {
   try { const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); return Array.isArray(data) ? data.slice(0, 5) : []; }
   catch { return []; }

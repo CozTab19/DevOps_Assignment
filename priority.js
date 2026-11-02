@@ -22,4 +22,6 @@ function calculatePriority({ impact, urgency, criticality, affected }) {
   return 'P4';
 }
 
-module.exports = { calculatePriority };
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { calculatePriority };
+}

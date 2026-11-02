@@ -33,5 +33,13 @@ jobs:
       - name: Validate JavaScript syntax
         run: node --check app.js
 
+        
+      - name: Validate priority module syntax
+        run: node --check priority.js
+
+      - name: Run automated unit tests
+        run: node --test tests/priority.test.js
+
+
       - name: Confirm validation complete
         run: echo "OpsPriority validation successful"

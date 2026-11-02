@@ -39,6 +39,22 @@ jobs:
 
       - name: Run automated unit tests
         run: node --test tests/priority.test.js
+        
+      - name: Package application
+        run: |
+          mkdir -p dist
+          cp index.html styles.css app.js priority.js dist/
+          cd dist
+          zip -r ../opspriority-release.zip .
+
+      - name: Upload deployment artefact
+        uses: actions/upload-artifact@v4
+        with:
+          name: opspriority-release
+          path: opspriority-release.zip
+          if-no-files-found: error
+          retention-days: 14
+
 
 
       - name: Confirm validation complete

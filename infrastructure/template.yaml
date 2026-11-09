@@ -1,0 +1,32 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Private S3 storage for OpsPriority static application deployment
+Parameters:
+  ProjectName:
+    Type: String
+    Default: opspriority
+    AllowedPattern: '[a-z0-9-]+'
+Resources:
+  SiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub '${ProjectName}-${AWS::AccountId}-${AWS::Region}'
+      VersioningConfiguration:
+        Status: Enabled
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        IgnorePublicAcls: true
+        BlockPublicPolicy: true
+        RestrictPublicBuckets: true
+      Tags:
+        - Key: Project
+          Value: OpsPriority
+        - Key: ManagedBy
+          Value: CloudFormation
+Outputs:
+  BucketName:
+    Description: Private application bucket; not a public website URL
+    Value: !Ref SiteBucket

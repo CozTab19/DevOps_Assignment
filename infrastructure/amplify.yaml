@@ -1,0 +1,39 @@
+
+AWSTemplateFormatVersion: '2010-09-09'
+
+Description: >
+  AWS Amplify Hosting infrastructure for
+  the DevOps Assignment application.
+
+Parameters:
+  ApplicationName:
+    Type: String
+    Default: DevOps-Assignment-IaC
+
+Resources:
+  AmplifyApplication:
+    Type: AWS::Amplify::App
+    Properties:
+      Name: !Ref ApplicationName
+      Platform: WEB
+      Tags:
+        - Key: Project
+          Value: DevOps-Assignment
+        - Key: ManagedBy
+          Value: CloudFormation
+
+  AmplifyMainBranch:
+    Type: AWS::Amplify::Branch
+    Properties:
+      AppId: !GetAtt AmplifyApplication.AppId
+      BranchName: main
+      EnableAutoBuild: false
+
+Outputs:
+  AmplifyAppId:
+    Description: ID of the Amplify application
+    Value: !GetAtt AmplifyApplication.AppId
+
+  AmplifyDefaultDomain:
+    Description: Default Amplify domain
+    Value: !GetAtt AmplifyApplication.DefaultDomain
